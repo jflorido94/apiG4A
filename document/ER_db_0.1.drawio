@@ -301,7 +301,7 @@
         <mxCell id="tMQ-BVNDZF__9HWK4L3Y-93" value="Reason / message" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="tMQ-BVNDZF__9HWK4L3Y-91" vertex="1">
           <mxGeometry x="30" width="175" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tMQ-BVNDZF__9HWK4L3Y-94" value="Baneos (Bans)" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;rounded=1;shadow=1;sketch=0;strokeColor=#000000;strokeWidth=2;fillColor=#ffffff;gradientColor=none;" parent="1" vertex="1">
+        <mxCell id="tMQ-BVNDZF__9HWK4L3Y-94" value="Avisos (Warnings)" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;rounded=1;shadow=1;sketch=0;strokeColor=#000000;strokeWidth=2;fillColor=#ffffff;gradientColor=none;" parent="1" vertex="1">
           <mxGeometry x="30" y="300" width="180" height="160" as="geometry" />
         </mxCell>
         <mxCell id="tMQ-BVNDZF__9HWK4L3Y-95" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=1;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tMQ-BVNDZF__9HWK4L3Y-94" vertex="1">

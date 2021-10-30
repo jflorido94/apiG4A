@@ -12,15 +12,51 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function wallet()
+    {
+        return $this->hasOne(wallet::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(product::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(review::class);
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(transaction::class);
+    }
+
+    public function sales()
+    {
+        return $this->hasManyThrough(transaction::class, product::class, 'user_id', 'product_id', 'id', 'id');
+    }
+
+    public function warnings()
+    {
+        return $this->hasMany(warning::class);
+    }
+
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
+        'nick',
         'name',
+        'surnames',
+        'dni',
+        'avatar',
         'email',
         'password',
+        'baned'
     ];
 
     /**
