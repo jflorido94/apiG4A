@@ -14,33 +14,40 @@ class User extends Authenticatable
 
     public function wallet()
     {
-        return $this->hasOne(wallet::class);
+        return $this->hasOne(Wallet::class);
     }
 
     public function products()
     {
-        return $this->hasMany(product::class);
+        return $this->hasMany(Product::class);
     }
 
     public function reviews()
     {
-        return $this->hasMany(review::class);
+        return $this->hasMany(Review::class);
     }
 
-    public function purchases()
+    public function transactions()
     {
-        return $this->hasMany(transaction::class);
+        return $this->hasMany(Transaction::class);
     }
 
-    public function sales()
+    public function reports()
     {
-        return $this->hasManyThrough(transaction::class, product::class, 'user_id', 'product_id', 'id', 'id');
+        return $this->hasMany(Report::class);
     }
 
-    public function warnings()
+    public function chats()
     {
-        return $this->hasMany(warning::class);
+        return $this->belongsToMany(Chat::class);
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+
 
 
     /**
@@ -55,8 +62,7 @@ class User extends Authenticatable
         'dni',
         'avatar',
         'email',
-        'password',
-        'baned'
+        'password'
     ];
 
     /**
@@ -67,6 +73,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'is_admin',
     ];
 
     /**

@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Report extends Model
 {
     use HasFactory;
+
+
+    public function banReason()
+    {
+        return $this->hasOne(BanReason::class);
+    }
+
+    public function reportable()
+    {
+        return $this->morphTo();
+    }
 }

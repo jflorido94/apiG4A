@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class BanReason extends Model
 {
     use HasFactory;
+
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
 }
