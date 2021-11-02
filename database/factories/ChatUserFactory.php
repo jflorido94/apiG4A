@@ -2,17 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Condition;
+use App\Models\Chat;
+use App\Models\Model;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ConditionFactory extends Factory
+class ChatUserFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Condition::class;
+    protected $model = Model::class;
 
     /**
      * Define the model's default state.
@@ -22,8 +24,9 @@ class ConditionFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->unique()->word(),
-            'description' => $this->faker->sentence(),
+            'chat_id' => rand(1,Chat::count()),
+            'user_id' => rand(1,User::count()),
+
         ];
     }
 }

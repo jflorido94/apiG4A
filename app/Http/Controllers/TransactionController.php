@@ -14,18 +14,19 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Transaction::all(),200);  //maybe solo las del usuario conectado?
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        /**
+         * Display the specified resource.
+         *
+         * @param  \App\Models\Transaction  $transaction
+         * @return \Illuminate\Http\Response
+         */
+        public function show(Transaction $transaction)
+        {
+            //
+        }
 
     /**
      * Store a newly created resource in storage.
@@ -39,35 +40,13 @@ class TransactionController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
-    public function show(transaction $transaction)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(transaction $transaction)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\transaction  $transaction
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, transaction $transaction)
+    public function update(Request $request, Transaction $transaction)
     {
         //
     }
@@ -75,10 +54,10 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\transaction  $transaction
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(transaction $transaction)
+    public function destroy(Transaction $transaction)
     {
         //
     }

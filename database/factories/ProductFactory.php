@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\product;
+use App\Models\Condition;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductFactory extends Factory
@@ -12,7 +14,7 @@ class ProductFactory extends Factory
      *
      * @var string
      */
-    protected $model = product::class;
+    protected $model = Product::class;
 
     /**
      * Define the model's default state.
@@ -26,6 +28,9 @@ class ProductFactory extends Factory
             'description'=> $this->faker->text(),
             'image'=> $this->faker->imageUrl(640,480,'technics'),
             'price'=> $this->faker->randomFloat(2,0,1000),
+
+            'user_id' => rand(1,User::count()),
+            'condition_id' => rand(1,Condition::count()),
 
         ];
     }

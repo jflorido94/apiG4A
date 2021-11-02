@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\message;
+use App\Models\Chat;
+use App\Models\Message;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class MessageFactory extends Factory
@@ -12,7 +14,7 @@ class MessageFactory extends Factory
      *
      * @var string
      */
-    protected $model = message::class;
+    protected $model = Message::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +24,11 @@ class MessageFactory extends Factory
     public function definition()
     {
         return [
-            'message' => $this->faker->text(),
+            'content' => $this->faker->text(),
+
+            'user_id' => rand(1,User::count()),
+            'chat_id' => rand(1,Chat::count()),
+
 
         ];
     }

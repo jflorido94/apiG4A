@@ -14,18 +14,19 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Message::all(),200); //deberian ser los de un chat expecifico
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        /**
+         * Display the specified resource.
+         *
+         * @param  \App\Models\Message  $message
+         * @return \Illuminate\Http\Response
+         */
+        public function show(Message $message)
+        {
+            //
+        }
 
     /**
      * Store a newly created resource in storage.
@@ -39,35 +40,13 @@ class MessageController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\message  $message
-     * @return \Illuminate\Http\Response
-     */
-    public function show(message $message)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\message  $message
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(message $message)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\message  $message
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, message $message)
+    public function update(Request $request, Message $message)
     {
         //
     }
@@ -75,10 +54,10 @@ class MessageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\message  $message
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function destroy(message $message)
+    public function destroy(Message $message)
     {
         //
     }

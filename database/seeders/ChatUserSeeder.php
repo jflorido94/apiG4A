@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use Database\Factories\ChatUserFactory;
 use Illuminate\Database\Seeder;
 
-class WalletSeeder extends Seeder
+class ChatUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +14,6 @@ class WalletSeeder extends Seeder
      */
     public function run()
     {
-        //
+        ChatUserFactory::factory(75)->create();
     }
 }

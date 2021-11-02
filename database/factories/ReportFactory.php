@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\report;
+use App\Models\BanReason;
+use App\Models\Report;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ReportFactory extends Factory
@@ -12,7 +14,7 @@ class ReportFactory extends Factory
      *
      * @var string
      */
-    protected $model = report::class;
+    protected $model = Report::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +24,17 @@ class ReportFactory extends Factory
     public function definition()
     {
         return [
-            'reason'=>$this->faker->sentence(),
+            'request'=>$this->faker->text(),
+            'respond'=>$this->faker->optional()->sentence(),
+            'is_warning'=>$this->faker->boolean(25),
+
+            'user_id' => rand(1,User::count()),
+            'ban_reason_id' => rand(1,BanReason::count()),
+
+            'reportable_id'=>rand(1,10),
+            'reportable_type'=>$this->faker->randomElement(['App\Models\Transaction', 'App\Models\Product']),
+
+
         ];
     }
 }

@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->string('image')->nullable();
             $table->decimal('price', 12, 2, true);
+            $table->boolean('erased')->default(false);
             $table->timestamps();
 
             $table->foreignId('user_id')->constrained();

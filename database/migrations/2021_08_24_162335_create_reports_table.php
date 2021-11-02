@@ -18,8 +18,8 @@ class CreateReportsTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('ban_reason_id')->constrained();
             $table->text('request');
-            $table->text('respond');
-            $table->boolean('is_warning');
+            $table->text('respond')->nullable();
+            $table->boolean('is_warning')->default(false);
             $table->timestamps();
 
             $table->integer('reportable_id')->unsigned();

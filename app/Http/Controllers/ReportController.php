@@ -14,18 +14,19 @@ class ReportController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Report::all(),200); //util para admins
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        /**
+         * Display the specified resource.
+         *
+         * @param  \App\Models\Report  $report
+         * @return \Illuminate\Http\Response
+         */
+        public function show(Report $report)
+        {
+            //
+        }
 
     /**
      * Store a newly created resource in storage.
@@ -39,35 +40,13 @@ class ReportController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\report  $report
-     * @return \Illuminate\Http\Response
-     */
-    public function show(report $report)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\report  $report
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(report $report)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\report  $report
+     * @param  \App\Models\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, report $report)
+    public function update(Request $request, Report $report)
     {
         //
     }
@@ -75,10 +54,10 @@ class ReportController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\report  $report
+     * @param  \App\Models\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function destroy(report $report)
+    public function destroy(Report $report)
     {
         //
     }

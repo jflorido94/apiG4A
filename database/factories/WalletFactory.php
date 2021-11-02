@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\wallet;
+use App\Models\Wallet;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class WalletFactory extends Factory
@@ -12,7 +12,7 @@ class WalletFactory extends Factory
      *
      * @var string
      */
-    protected $model = wallet::class;
+    protected $model = Wallet::class;
 
     /**
      * Define the model's default state.

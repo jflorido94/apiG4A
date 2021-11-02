@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Review;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class ReviewController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,19 +14,19 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        return response()->json(Review::all(),200);  // sin sentido mostrarlas todas
+        return response()->json(User::all(),200);
     }
 
-        /**
-         * Display the specified resource.
-         *
-         * @param  \App\Models\Review  $review
-         * @return \Illuminate\Http\Response
-         */
-        public function show(Review $review)
-        {
-            //
-        }
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user)
+    {
+
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -39,14 +39,15 @@ class ReviewController extends Controller
         //
     }
 
+
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Review  $review
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Review $review)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -54,10 +55,10 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Review  $review
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Review $review)
+    public function destroy(User $user)
     {
         //
     }

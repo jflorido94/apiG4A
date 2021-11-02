@@ -25,14 +25,14 @@ class UserFactory extends Factory
         return [
             'nick' => $this->faker->userName(),
             'name' => $this->faker->firstname(),
-            'surname' => $this->faker->lastName(),
-            'dni' => $this->faker->unique()->dni(),
+            'surnames' => $this->faker->lastName(),
+            'dni' => $this->faker->unique()->sentence(2),
             'avatar' => $this->faker->imageUrl(180,180,'people'),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'is_admin' => false,
             'remember_token' => Str::random(10),
-            'baned' => 'false',
         ];
     }
 

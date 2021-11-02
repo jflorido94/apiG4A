@@ -14,18 +14,19 @@ class ConditionController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Condition::all(),200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        /**
+         * Display the specified resource.
+         *
+         * @param  \App\Models\Condition  $condition
+         * @return \Illuminate\Http\Response
+         */
+        public function show(Condition $condition)
+        {
+            //
+        }
 
     /**
      * Store a newly created resource in storage.
@@ -39,35 +40,13 @@ class ConditionController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\condition  $condition
-     * @return \Illuminate\Http\Response
-     */
-    public function show(condition $condition)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\condition  $condition
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(condition $condition)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\condition  $condition
+     * @param  \App\Models\Condition  $condition
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, condition $condition)
+    public function update(Request $request, Condition $condition)
     {
         //
     }
@@ -75,10 +54,10 @@ class ConditionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\condition  $condition
+     * @param  \App\Models\Condition  $condition
      * @return \Illuminate\Http\Response
      */
-    public function destroy(condition $condition)
+    public function destroy(Condition $condition)
     {
         //
     }

@@ -14,15 +14,16 @@ class WalletController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Wallet::all(), 200);  //creo que no se debe hacer.
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display the specified resource.
      *
+     * @param  \App\Models\Wallet  $wallet
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function show(Wallet $wallet)
     {
         //
     }
@@ -39,35 +40,13 @@ class WalletController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\wallet  $wallet
-     * @return \Illuminate\Http\Response
-     */
-    public function show(wallet $wallet)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\wallet  $wallet
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(wallet $wallet)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\wallet  $wallet
+     * @param  \App\Models\Wallet  $wallet
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, wallet $wallet)
+    public function update(Request $request, Wallet $wallet)
     {
         //
     }
@@ -75,10 +54,10 @@ class WalletController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\wallet  $wallet
+     * @param  \App\Models\Wallet  $wallet
      * @return \Illuminate\Http\Response
      */
-    public function destroy(wallet $wallet)
+    public function destroy(Wallet $wallet)
     {
         //
     }

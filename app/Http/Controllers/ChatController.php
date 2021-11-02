@@ -14,18 +14,19 @@ class ChatController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Chat::all(),200); // deberian ser solo los del usuario conectado
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        /**
+         * Display the specified resource.
+         *
+         * @param  \App\Models\Chat  $chat
+         * @return \Illuminate\Http\Response
+         */
+        public function show(Chat $chat)
+        {
+            //
+        }
 
     /**
      * Store a newly created resource in storage.
@@ -34,28 +35,6 @@ class ChatController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Chat  $chat
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Chat $chat)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Chat  $chat
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Chat $chat)
     {
         //
     }

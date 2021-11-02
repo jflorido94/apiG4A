@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\BanReason;
 use Illuminate\Database\Seeder;
 
 class BanReasonSeeder extends Seeder
@@ -13,6 +14,6 @@ class BanReasonSeeder extends Seeder
      */
     public function run()
     {
-        //
+        BanReason::factory(10)->create();
     }
 }

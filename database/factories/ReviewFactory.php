@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\review;
+use App\Models\Review;
+use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ReviewFactory extends Factory
@@ -12,7 +14,7 @@ class ReviewFactory extends Factory
      *
      * @var string
      */
-    protected $model = review::class;
+    protected $model = Review::class;
 
     /**
      * Define the model's default state.
@@ -24,6 +26,11 @@ class ReviewFactory extends Factory
         return [
             'stars'=>$this->faker->numberBetween(1,5),
             'comment'=>$this->faker->sentence(),
+
+            'user_id' => rand(1,User::count()),
+            'transaction_id' => rand(1,Transaction::count()),
+
+
         ];
     }
 }
