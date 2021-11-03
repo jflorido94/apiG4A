@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Product;
+use App\Models\Report;
+use App\Models\Review;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
-    return dd(User::all());
+    return view('welcome');
+    // $aux = Report::findOrFail(15);
+    // return response()->json($aux->reportable,200,[],JSON_PRETTY_PRINT);
+    // return dd(Product::findOrFail(3)->reports());
 });
