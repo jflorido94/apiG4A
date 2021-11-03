@@ -1,11 +1,7 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
-use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
-
-use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,12 +14,6 @@ use App\Models\User;
 |
 */
 
-
-// Route::prefix('users')->group(function () {
-//     Route::get('/',         [UserController::class, 'index'])   ->name('users.index');
-//     Route::get('/{user}',     [UserController::class, 'show'])    ->name('user.show');
-// });
-
-Route::apiResource('users', UserController::class);
-
-
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
