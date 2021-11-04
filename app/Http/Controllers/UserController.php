@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return response()->json(User::all(),200);
+        return User::paginate();
     }
 
     /**
@@ -25,20 +26,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-
+        // $resource = User::findOrFail($user);
+        return new UserResource($user);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
 
     /**
      * Update the specified resource in storage.
