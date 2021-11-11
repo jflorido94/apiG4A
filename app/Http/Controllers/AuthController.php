@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Models\Wallet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,32 +17,29 @@ class AuthController extends Controller
      */
     public function signup(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        Validator::make($request->all(), [
             'name' => 'required',
             'surnames' => 'required',
             'nick' => 'required|unique:users,nick',
             'dni' => 'required|unique:users,dni',
-            'avatar' => 'required',
+            'avatar' => 'image|max:1024',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
             'confirm_password' => 'required|same:password'
         ]);
 
-        if ($validator->fails()) {
-            // return "Error";
-            return response()->json($validator->errors(), 422);
-        }
-
         $input = $request->all();
 
         //ciframos el password
-        $input['password'] = bcrypt($request->get('password'));
+        $input['password'] = bcrypt($request->input('password'));
 
-        User::create($input);
+        $user = User::create($input);
+        Wallet::create([
+            'amount' => 0,
+            'user_id' => $user->id,
+        ]);
 
-        return response()->json([
-            'message' => 'Successfully created user!'
-        ], 201);
+        return response()->json(['message' => 'Successfully created user!',], 201);
     }
 
     /**
@@ -57,9 +56,7 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (!Auth::attempt($credentials))
-            return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
+            return response()->json(['message' => 'Unauthorized'], 401);
 
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
@@ -83,9 +80,7 @@ class AuthController extends Controller
     {
         $request->user()->token()->revoke();
 
-        return response()->json([
-            'message' => 'Successfully logged out'
-        ]);
+        return response()->json(['message' => 'Successfully logged out']);
     }
 
     /**
@@ -93,6 +88,8 @@ class AuthController extends Controller
      */
     public function user(Request $request)
     {
-        return response()->json($request->user());
+        $me = User::findOrFail($request->user()->id);
+
+        return response()->json(new UserResource($me),200);
     }
 }

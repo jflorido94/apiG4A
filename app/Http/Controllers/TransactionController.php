@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TransactionResource;
+use App\Models\Product;
+use App\Models\State;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class TransactionController extends Controller
 {
@@ -14,7 +19,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        return response()->json(Transaction::all(),200);  //maybe solo las del usuario conectado?
+        return response()->json(TransactionResource::collection(Transaction::latest()->paginate()),206);  //maybe solo las del usuario conectado?
     }
 
         /**
@@ -25,7 +30,7 @@ class TransactionController extends Controller
          */
         public function show(Transaction $transaction)
         {
-            //
+            return response()->json(new TransactionResource($transaction),200);
         }
 
     /**
@@ -36,7 +41,27 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Validator::make($request->all(),[
+            'product_id' => 'required|exists:products,id',
+        ])->validate();
+
+        $user = Auth::user();
+        $product = Product::find($request->input('product_id'));
+        $state = State::find('2');
+
+        $transaction = new Transaction();
+
+        $transaction->user()->associate($user);
+        $transaction->product()->associate($product);
+        $transaction->state()->associate($state);
+        $transaction->amount = $transaction->product->price;
+
+        $res = $transaction->save();
+
+        if ($res) {
+            return response()->json(['message' => 'Transaction create succesfully'], 201);
+        }
+        return response()->json(['message' => 'Error to create transaction'], 500);
     }
 
     /**
@@ -48,7 +73,27 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
-        //
+        Validator::make($request->all(),[
+            'state_id' => 'exists:states,id',
+        ])->validate();
+
+        //Segun el estado lo podrá poner el comprador o el dueño del producto (vendedor)
+        if (Auth::id() !== $transaction->user->id) {
+            return response()->json(['message' => 'You don\'t have permissions'], 403);
+        }
+
+        if (!empty($request->input('state_id'))) {
+            $state = State::find($request->input('state_id'));
+            $transaction->state()->associate($state);
+        }
+
+        $res = $transaction->save();
+
+        if ($res) {
+            return response()->json(['message' => 'Transaction update succesfully'],204);
+        }
+
+        return response()->json(['message' => 'Error to update transaction'], 500);
     }
 
     /**
@@ -59,6 +104,18 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
-        //
+        if (Auth::id() !== $transaction->user->id) {
+            return response()->json(['message' => 'You don\'t have permissions'], 403);
+        }
+
+        $transaction->state='1';
+
+        $res = $transaction->save();
+
+        if ($res) {
+            return response()->json(['message' => 'Transaction delete succesfully']);
+        }
+
+        return response()->json(['message' => 'Error to delete transaction'], 500);
     }
 }

@@ -62,7 +62,8 @@ class User extends Authenticatable
         'dni',
         'avatar',
         'email',
-        'password'
+        'password',
+        'erased'
     ];
 
     /**
@@ -74,6 +75,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'is_admin',
+        'erased',
     ];
 
     /**

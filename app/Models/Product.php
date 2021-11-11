@@ -9,10 +9,14 @@ class Product extends Model
 {
     use HasFactory;
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function condition()
     {
-        return $this->hasOne(Condition::class);
+        return $this->belongsTo(Condition::class);
     }
 
     public function reports()

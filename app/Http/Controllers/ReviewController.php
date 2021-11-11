@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ReviewResource;
 use App\Models\Review;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ReviewController extends Controller
 {
@@ -14,7 +18,7 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        return response()->json(Review::all(),200);  // sin sentido mostrarlas todas
+        return response()->json(ReviewResource::collection(Review::latest()->paginate()),206);  // sin sentido mostrarlas todas
     }
 
         /**
@@ -25,7 +29,7 @@ class ReviewController extends Controller
          */
         public function show(Review $review)
         {
-            //
+            return response()->json($review,200);
         }
 
     /**
@@ -36,7 +40,30 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Validator::make($request->all(),[
+            'title' => 'required|max:180',
+            'start' => 'required|integer|between:1,10',
+            'comment' => 'required|max:4000',
+            'transaction_id' => 'required|exists:transactions,id',
+        ])->validate();
+
+        $user = Auth::user();
+        $transaction = Transaction::find($request->input('transaction_id'));
+
+        $review = new Review();
+
+        $review->user()->associate($user);
+        $review->transaction()->associate($transaction);
+        $review->title = $request->input('title');
+        $review->stars = $request->input('stars');
+        $review->comment = $request->input('comment');
+
+        $res = $review->save();
+
+        if ($res) {
+            return response()->json(['message' => 'Review create succesfully'], 201);
+        }
+        return response()->json(['message' => 'Error to create review'], 500);
     }
 
     /**
@@ -48,7 +75,33 @@ class ReviewController extends Controller
      */
     public function update(Request $request, Review $review)
     {
-        //
+        Validator::make($request->all(),[
+            'title' => 'required|max:180',
+            'start' => 'required|integer|between:1,10',
+            'comment' => 'required|max:4000',
+        ])->validate();
+
+        if (Auth::id() !== $review->user->id) {
+            return response()->json(['message' => 'You don\'t have permissions'], 403);
+        }
+
+        if (!empty($request->input('title'))) {
+            $review->title = $request->input('title');
+        }
+        if (!empty($request->input('start'))) {
+            $review->stars = $request->input('start');
+        }
+        if (!empty($request->input('comment'))) {
+            $review->comment = $request->input('comment');
+        }
+
+        $res = $review->save();
+
+        if ($res) {
+            return response()->json(['message' => 'Review update succesfully'],204);
+        }
+
+        return response()->json(['message' => 'Error to update review'], 500);
     }
 
     /**

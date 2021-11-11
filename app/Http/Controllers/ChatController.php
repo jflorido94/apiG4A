@@ -14,7 +14,7 @@ class ChatController extends Controller
      */
     public function index()
     {
-        return response()->json(Chat::all(),200); // deberian ser solo los del usuario conectado
+        return response()->json(Chat::paginate(),200); // deberian ser solo los del usuario conectado
     }
 
         /**
@@ -25,7 +25,7 @@ class ChatController extends Controller
          */
         public function show(Chat $chat)
         {
-            //
+            return response()->json($chat,200);
         }
 
     /**

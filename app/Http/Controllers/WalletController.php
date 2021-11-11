@@ -14,7 +14,7 @@ class WalletController extends Controller
      */
     public function index()
     {
-        return response()->json(Wallet::all(), 200);  //creo que no se debe hacer.
+        return response()->json(Wallet::paginate(), 200);  //creo que no se debe hacer.
     }
 
     /**
@@ -25,7 +25,7 @@ class WalletController extends Controller
      */
     public function show(Wallet $wallet)
     {
-        //
+        return response()->json($wallet,200);
     }
 
     /**

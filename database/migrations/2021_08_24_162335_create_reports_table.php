@@ -15,12 +15,13 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('ban_reason_id')->constrained();
             $table->text('request');
             $table->text('respond')->nullable();
             $table->boolean('is_warning')->default(false);
             $table->timestamps();
+
+            $table->foreignId('ban_reason_id')->constrained();
+            $table->foreignId('user_id')->constrained();
 
             $table->integer('reportable_id')->unsigned();
             $table->string('reportable_type');

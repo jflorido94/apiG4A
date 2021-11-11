@@ -14,7 +14,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return response()->json(Message::all(),200); //deberian ser los de un chat expecifico
+        return response()->json(Message::paginate(),200); //deberian ser los de un chat expecifico
     }
 
         /**
@@ -25,7 +25,7 @@ class MessageController extends Controller
          */
         public function show(Message $message)
         {
-            //
+            return response()->json($message,200); //sin sentido
         }
 
     /**
