@@ -30,6 +30,13 @@ class AuthController extends Controller
 
         $input = $request->all();
 
+        if (!empty($request->file('avatar'))) {
+            $url_image = $this->upload($request->file('avatar'));
+        }else {
+            $url_image = 'url avatar predeterminado';
+        }
+        $input['avatar']  = $url_image;
+
         //ciframos el password
         $input['password'] = bcrypt($request->input('password'));
 
@@ -91,5 +98,15 @@ class AuthController extends Controller
         $me = User::findOrFail($request->user()->id);
 
         return response()->json(new UserResource($me),200);
+    }
+
+    private function upload($image)
+    {
+        $path_info = pathinfo($image->getClientOriginalName());
+        $image_path = 'images/user';
+
+        $rename = uniqid() . '.' . $path_info['extension'];
+        $image->move(public_path() . "/$image_path", $rename);
+        return "$image_path/$rename";
     }
 }

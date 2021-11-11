@@ -47,7 +47,7 @@ class UserController extends Controller
             'surnames' => '',
             'nick' => 'unique:users,nick',
             'dni' => 'unique:users,dni',
-            'avatar' => '',
+            'avatar' => 'image|max:1024',
             'email' => 'email|unique:users,email',
             'old_password' => 'required',
             'new_password' => '',
@@ -62,10 +62,10 @@ class UserController extends Controller
             return response()->json(['message' => 'You don\'t have permissions'], 403);
         }
 
-        // if (!empty($request->file('avatar'))) {
-        //     $url_image = $this->upload($request->file('avatar'));
-        //     $user->avatar = $url_image;
-        // }
+        if (!empty($request->file('avatar'))) {
+            $url_image = $this->upload($request->file('avatar'));
+            $user->avatar = $url_image;
+        }
         if (!empty($request->input('name'))) {
             $user->name = $request->input('name');
         }

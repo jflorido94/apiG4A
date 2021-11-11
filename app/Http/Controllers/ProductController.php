@@ -55,8 +55,12 @@ class ProductController extends Controller
 
         $product->user()->associate($user);
         $product->condition()->associate($condition);
-        // $url_image = $this->upload($request->file('image'));
-        // $product->image = $url_image;
+        if (!empty($request->file('image'))) {
+            $url_image = $this->upload($request->file('image'));
+        }else {
+            $url_image = 'url producto predeterminado';
+        }
+        $product->image = $url_image;
         $product->title = $request->input('title');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
@@ -95,10 +99,10 @@ class ProductController extends Controller
             $product->condition()->associate($condition);
         }
 
-        // if (!empty($request->file('image'))) {
-        //     $url_image = $this->upload($request->file('image'));
-        //     $product->image = $url_image;
-        // }
+        if (!empty($request->file('image'))) {
+            $url_image = $this->upload($request->file('image'));
+            $product->image = $url_image;
+        }
         if (!empty($request->input('title'))) {
             $product->title = $request->input('title');
         }
