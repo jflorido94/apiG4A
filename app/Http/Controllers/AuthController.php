@@ -33,7 +33,7 @@ class AuthController extends Controller
         if (!empty($request->file('avatar'))) {
             $url_image = $this->upload($request->file('avatar'));
         }else {
-            $url_image = 'url avatar predeterminado';
+            $url_image = 'images/user/default.jpg';
         }
         $input['avatar']  = $url_image;
 

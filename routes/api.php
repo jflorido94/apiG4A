@@ -39,7 +39,7 @@ Route::group([
 
 //---- Usuarios ---
 Route::prefix('users')->group(function () {
-    // Route::get('/', [UserController::class, 'index']);
+    Route::get('/', [UserController::class, 'index']);
     Route::get('/{user}', [UserController::class, 'show']);
     // --- Self only
     Route::post('/{user}', [UserController::class, 'update'])->middleware('auth:api');
