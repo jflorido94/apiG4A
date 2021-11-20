@@ -52,6 +52,13 @@ class ConditionController extends Controller
 
         $condition->name = $request->input('name');
         $condition->description = $request->input('description');
+
+        $res = $condition->save();
+
+        if ($res) {
+            return response()->json(['message' => 'Condition create succesfully'], 201);
+        }
+        return response()->json(['message' => 'Error to create condition'], 500);
     }
 
     /**
@@ -68,7 +75,7 @@ class ConditionController extends Controller
             'description' => 'max:4000',
         ])->validate();
 
-        if (Auth::user()->is_admin) {
+        if (! Auth::user()->is_admin) {
             return response()->json(['message' => 'You don\'t have permissions'], 403);
         }
 
@@ -78,6 +85,13 @@ class ConditionController extends Controller
         if (!empty($request->input('description'))) {
             $condition->description = $request->input('description');
         }
+
+        $res = $condition->save();
+
+        if ($res) {
+            return response()->json(['message' => 'Condition update succesfully'], 201);
+        }
+        return response()->json(['message' => 'Error to update condition'], 500);
     }
 
     /**

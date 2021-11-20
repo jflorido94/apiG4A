@@ -52,6 +52,13 @@ class StateController extends Controller
 
         $state->name = $request->input('name');
         $state->description = $request->input('description');
+
+        $res = $state->save();
+
+        if ($res) {
+            return response()->json(['message' => 'State create succesfully'], 201);
+        }
+        return response()->json(['message' => 'Error to create state'], 500);
     }
 
     /**
@@ -68,7 +75,7 @@ class StateController extends Controller
             'description' => 'max:4000',
         ])->validate();
 
-        if (Auth::user()->is_admin) {
+        if (! Auth::user()->is_admin) {
             return response()->json(['message' => 'You don\'t have permissions'], 403);
         }
 
@@ -78,6 +85,13 @@ class StateController extends Controller
         if (!empty($request->input('description'))) {
             $state->description = $request->input('description');
         }
+
+        $res = $state->save();
+
+        if ($res) {
+            return response()->json(['message' => 'State update succesfully'], 201);
+        }
+        return response()->json(['message' => 'Error to update state'], 500);
     }
 
     /**

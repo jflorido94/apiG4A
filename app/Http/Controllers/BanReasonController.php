@@ -48,10 +48,17 @@ class BanReasonController extends Controller
             return response()->json(['message' => 'You don\'t have permissions'], 403);
         }
 
-        $banreason = new BanReason();
+        $banReason = new BanReason();
 
-        $banreason->name = $request->input('name');
-        $banreason->rule = $request->input('rule');
+        $banReason->name = $request->input('name');
+        $banReason->rule = $request->input('rule');
+
+        $res = $banReason->save();
+
+        if ($res) {
+            return response()->json(['message' => 'BanReason create succesfully'], 201);
+        }
+        return response()->json(['message' => 'Error to create banReason'], 500);
     }
 
     /**
@@ -68,7 +75,7 @@ class BanReasonController extends Controller
             'rule' => 'max:4000',
         ])->validate();
 
-        if (Auth::user()->is_admin) {
+        if (! Auth::user()->is_admin) {
             return response()->json(['message' => 'You don\'t have permissions'], 403);
         }
 
@@ -78,6 +85,13 @@ class BanReasonController extends Controller
         if (!empty($request->input('rule'))) {
             $banReason->rule = $request->input('rule');
         }
+
+        $res = $banReason->save();
+
+        if ($res) {
+            return response()->json(['message' => 'BanReason create succesfully'], 201);
+        }
+        return response()->json(['message' => 'Error to create banReason'], 500);
     }
 
     /**
@@ -99,6 +113,6 @@ class BanReasonController extends Controller
             return response()->json(['message' => 'BanReason delete succesfully']);
         }
 
-        return response()->json(['message' => 'Error to delete banreason'], 500);
+        return response()->json(['message' => 'Error to delete banReason'], 500);
     }
 }
