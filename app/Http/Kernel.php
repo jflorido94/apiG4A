@@ -21,6 +21,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+
     ];
 
     /**
@@ -59,7 +60,7 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'cors' => \App\Http\Middleware\Cors::class,
+        // 'cors' => \App\Http\Middleware\Cors::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,

@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['cors'])->group(function () {
+// Route::middleware(['cors'])->group(function () {
 
     //---- Login---
     Route::post('login', [AuthController::class, 'login']);
@@ -148,4 +148,4 @@ Route::middleware(['cors'])->group(function () {
     });
 
 
-});
+// });
