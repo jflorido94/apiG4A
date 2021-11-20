@@ -44,7 +44,7 @@ class BanReasonController extends Controller
             'rule' => 'required|max:4000',
         ])->validate();
 
-        if (Auth::user()->is_admin) {
+        if (! Auth::user()->is_admin) {
             return response()->json(['message' => 'You don\'t have permissions'], 403);
         }
 
