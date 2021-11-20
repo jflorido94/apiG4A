@@ -63,7 +63,8 @@ class User extends Authenticatable
         'avatar',
         'email',
         'password',
-        'erased'
+        'erased',
+        'is_admin'
     ];
 
     /**
