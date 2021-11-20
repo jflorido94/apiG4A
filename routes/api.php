@@ -25,7 +25,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware(['cors'])->group(function () {
 
     //---- Login---
     Route::post('login', [AuthController::class, 'login']);
@@ -147,5 +146,3 @@ use Illuminate\Support\Facades\Route;
         Route::delete('/{message}', [MessageController::class, 'destroy'])->middleware('auth:api');
     });
 
-
-// });
