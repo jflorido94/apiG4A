@@ -18,7 +18,7 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        return response()->json(ReviewResource::collection(Review::latest()->paginate()),206);  // sin sentido mostrarlas todas
+        return response()->json(ReviewResource::collection(Review::latest()->paginate()),200);  // sin sentido mostrarlas todas
     }
 
         /**

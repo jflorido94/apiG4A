@@ -19,7 +19,7 @@ class ReportController extends Controller
      */
     public function index()
     {
-        return response()->json(ReportResource::collection(Report::latest()->paginate()),206); //util para admins
+        return response()->json(ReportResource::collection(Report::latest()->paginate()),200); //util para admins
     }
 
         /**

@@ -19,7 +19,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        return response()->json(TransactionResource::collection(Transaction::latest()->paginate()),206);  //maybe solo las del usuario conectado?
+        return response()->json(TransactionResource::collection(Transaction::latest()->paginate()),200);  //maybe solo las del usuario conectado?
     }
 
         /**
