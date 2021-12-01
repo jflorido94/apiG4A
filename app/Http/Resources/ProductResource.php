@@ -30,6 +30,7 @@ class ProductResource extends JsonResource
                 'title' => $this->condition->name,
                 'info' => $this->condition->description,
             ],
+            'reviews' => $this->reviews,
             'created_at' => $this->created_at,
         ];
     }
