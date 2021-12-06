@@ -21,18 +21,18 @@ class AuthController extends Controller
             'name' => 'required',
             'surnames' => 'required',
             'nick' => 'required|unique:users,nick',
-            'dni' => 'required|unique:users,dni',
+            'dni' => 'required|min:8|unique:users,dni',
             'avatar' => 'image|max:1024',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
             'confirm_password' => 'required|same:password'
-        ]);
+        ])->validate();
 
         $input = $request->all();
 
         if (!empty($request->file('avatar'))) {
             $url_image = $this->upload($request->file('avatar'));
-        }else {
+        } else {
             $url_image = 'images/user/default.jpg';
         }
         $input['avatar']  = $url_image;
@@ -46,7 +46,7 @@ class AuthController extends Controller
             'user_id' => $user->id,
         ]);
 
-        return response()->json(['message' => 'Successfully created user!',], 201);
+        return response()->json(['message' => 'Usuario creado',], 201);
     }
 
     /**
@@ -54,11 +54,11 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $request->validate([
+        Validator::make($request->all(), [
             'email' => 'required|string|email',
             'password' => 'required|string',
             'remember_me' => 'boolean'
-        ]);
+        ])->validate();
 
         $credentials = request(['email', 'password']);
 
@@ -97,7 +97,7 @@ class AuthController extends Controller
     {
         $me = User::findOrFail($request->user()->id);
 
-        return response()->json(new UserResource($me),200);
+        return response()->json(new UserResource($me), 200);
     }
 
     private function upload($image)

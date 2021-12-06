@@ -52,7 +52,7 @@ class UserController extends Controller
             'old_password' => 'required',
             'new_password' => '',
             'confirm_new_password' => 'same:new_password'
-        ]);
+        ])->validate();
 
         if (Auth::id() !== $user->id) {
             return response()->json(['message' => 'You don\'t have permissions'], 403);
