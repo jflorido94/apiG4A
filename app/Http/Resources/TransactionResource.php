@@ -28,10 +28,12 @@ class TransactionResource extends JsonResource
                 'condition' => $this->product->condition->name,
             ],
             'state' => [
+                'id' => $this->state->id,
                 'title' => $this->state->name,
                 'info' => $this->state->description,
             ],
             'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

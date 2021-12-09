@@ -14,7 +14,7 @@ class AuthController extends Controller
 {
     /**
      * Registro de usuario
-     */
+    */
     public function signup(Request $request)
     {
         Validator::make($request->all(), [
@@ -87,7 +87,7 @@ class AuthController extends Controller
     {
         $request->user()->token()->revoke();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => 'Successfully logged out'],201);
     }
 
     /**

@@ -34,6 +34,8 @@ Route::group([
 ], function () {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::get('me', [AuthController::class, 'user']);
+    Route::post('me', [AuthController::class, 'user']);
+    Route::delete('me', [AuthController::class, 'user']);
 });
 
 
@@ -50,9 +52,9 @@ Route::prefix('users')->group(function () {
 //---- Productos ---
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index']);
+    Route::get('/{product}', [ProductController::class, 'show']);
     // ---- Auth only
     Route::post('/', [ProductController::class, 'store'])->middleware('auth:api');
-    Route::get('/{product}', [ProductController::class, 'show']);
     // ---- Self only
     Route::post('/{product}', [ProductController::class, 'update'])->middleware('auth:api');
     Route::delete('/{product}', [ProductController::class, 'destroy'])->middleware('auth:api');
@@ -68,7 +70,7 @@ Route::prefix('transactions')->group(function () {
     // --- Self only
     Route::get('/{transaction}', [TransactionController::class, 'show'])->middleware('auth:api');
     Route::post('/{transaction}', [TransactionController::class, 'update'])->middleware('auth:api');
-    Route::delete('/{transaction}', [TransactionController::class, 'destroy']);
+    Route::delete('/{transaction}', [TransactionController::class, 'destroy'])->middleware('auth:api');
 });
 
 
@@ -97,7 +99,7 @@ Route::prefix('reviews')->group(function () {
     // Route::get('/', [ReviewController::class, 'index']);
     // --- Auth only
     Route::post('/', [ReviewController::class, 'store'])->middleware('auth:api');
-    // Route::get('/{review}', [ReviewController::class, 'show']);
+    Route::get('/{review}', [ReviewController::class, 'show'])->middleware('auth:api');
     Route::post('/{review}', [ReviewController::class, 'update'])->middleware('auth:api');
 });
 

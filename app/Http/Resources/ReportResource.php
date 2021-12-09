@@ -34,6 +34,7 @@ class ReportResource extends JsonResource
                 'user' => $this->reportable->user->nick,
             ],
             'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

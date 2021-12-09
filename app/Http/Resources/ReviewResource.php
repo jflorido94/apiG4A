@@ -30,10 +30,12 @@ class ReviewResource extends JsonResource
                     'condition' => $this->transaction->product->condition->name,
                 ],
                 'state' => [
+                    'id' => $this->transaction->state->id,
                     'title' => $this->transaction->state->name,
                     'info' => $this->transaction->state->description,
                 ],
             ],
+            'created_at' => $this->created_at,
         ];
     }
 }
