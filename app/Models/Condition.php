@@ -9,7 +9,7 @@ class Condition extends Model
 {
     use HasFactory;
 
-
+    // tiene muchos productos
     public function products()
     {
         return $this->hasMany(Product::class);

@@ -9,7 +9,7 @@ class State extends Model
 {
     use HasFactory;
 
-
+    // tiene varias compras
     public function transactions()
     {
         return $this->hasMany(Transaction::class);

@@ -10,6 +10,7 @@ class Wallet extends Model
     use HasFactory;
 
 
+    // es de un usuario
     public function user()
     {
         return $this->belongsTo(User::class);

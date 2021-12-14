@@ -9,21 +9,21 @@ class Transaction extends Model
 {
     use HasFactory;
 
-
-
-
+    // tiene un estado
     public function state()
     {
         return $this->hasOne(State::class);
     }
 
-    public function reviews()
+    // tiene una review
+    public function review()
     {
-        return $this->hasMany(Review::class);
+        return $this->hasOne(Review::class);
     }
 
 
-    public function reports()
+    // recibe varios reportes
+    public function accusations()
     {
         return $this->morphMany(Report::class, 'reportable');
     }

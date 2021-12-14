@@ -9,7 +9,7 @@ class BanReason extends Model
 {
     use HasFactory;
 
-
+    // tiene muchos reportes
     public function reports()
     {
         return $this->hasMany(Report::class);

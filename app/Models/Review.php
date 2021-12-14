@@ -9,11 +9,13 @@ class Review extends Model
 {
     use HasFactory;
 
+    // es escrita por un usuario
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    // es sobre una compra
     public function transaction()
     {
         return $this->belongsTo(Transaction::class);
