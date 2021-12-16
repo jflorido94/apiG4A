@@ -21,6 +21,12 @@ class Product extends Model
         return $this->belongsTo(Condition::class);
     }
 
+    // aparece en una transaccion
+    public function transaccition()
+    {
+        return $this->belongsTo(Transaction::class);
+    }
+
     // recibe varios reportes
     public function accusations()
     {

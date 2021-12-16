@@ -22,10 +22,15 @@ class UserResource extends JsonResource
             'dni'       =>      $this->dni,
             'avatar'    =>      url($this->avatar),
             'email'     =>      $this->email,
-            'erased'     =>      $this->erased,
+            'erased'    =>      $this->erased,
             'wallet'    =>      [
-                'amount' => $this->wallet->amount,
+                'amount'    => $this->wallet->amount,
+            ],
+            'products'  =>      [
+                'count'     => count($this->products),
+                'data'      =>ProductResource::collection($this->products),
             ]
+            // 'reviews'   =>
         ];
     }
 }

@@ -24,7 +24,7 @@ class ProductResource extends JsonResource
             'owner' => [
                 'id' => $this->user->id,
                 'nick' => $this->user->nick,
-                'avatar' => $this->user->avatar,
+                'avatar' => url($this->user->avatar),
             ],
             'condition' => [
                 'id'=> $this->condition->id,

@@ -30,8 +30,9 @@ class ReportResource extends JsonResource
                 'avatar' => $this->user->avatar,
             ],
             'item_reported' => [
-                'id' => $this->reportable->id,
-                'user' => $this->reportable->user->nick,
+                'id' => $this->accusation->id,
+                'user' => $this->accusation->user->nick,
+                'item' => $this->accusation,
             ],
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

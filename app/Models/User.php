@@ -60,6 +60,10 @@ class User extends Authenticatable
         return $this->hasMany(Message::class);
     }
 
+    public function myReviews(){
+        return Review::where(Review::transaction());
+    }
+
 
 
     /**

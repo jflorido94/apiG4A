@@ -9,11 +9,24 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    // la realiza un usuario
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     // tiene un estado
     public function state()
     {
-        return $this->hasOne(State::class);
+        return $this->belong(State::class);
     }
+
+    // tiene un producto
+    public function product()
+    {
+        return $this->hasOne(Product::class);
+    }
+
 
     // tiene una review
     public function review()
