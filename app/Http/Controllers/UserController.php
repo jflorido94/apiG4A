@@ -49,17 +49,12 @@ class UserController extends Controller
             'dni' => 'unique:users,dni',
             'avatar' => 'image|max:1024',
             'email' => 'email|unique:users,email',
-            'old_password' => 'required',
-            'new_password' => '',
-            'confirm_new_password' => 'same:new_password'
+            'password' => 'required|current_password',
+            'new_password' => 'confirmed',
         ])->validate();
 
         if (Auth::id() !== $user->id) {
-            return response()->json(['message' => 'You don\'t have permissions'], 403);
-        }
-
-        if (Auth::user()->password !== bcrypt($request->input('password'))) {
-            return response()->json(['message' => 'You don\'t have permissions'], 403);
+            return response()->json(['message' => 'No tienes los permisos necesarios'], 403);
         }
 
         if (!empty($request->file('avatar'))) {
@@ -85,10 +80,10 @@ class UserController extends Controller
         $res = $user->save();
 
         if ($res) {
-            return response()->json(['message' => 'User update succesfully'],204);
+            return response()->json(['message' => 'Usuario actualizado correctamente'],200);
         }
 
-        return response()->json(['message' => 'Error to update user'], 500);
+        return response()->json(['message' => 'Error al actualizar usuario'], 500);
     }
 
     /**
@@ -99,8 +94,14 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        //TODO: pedir contraseña para borrar
+
+        // Validator::make($request->all(), [
+        //     'password' => 'required|current_password'
+        // ])->validate();
+
         if (Auth::id() !== $user->id) {
-            return response()->json(['message' => 'You don\'t have permissions'], 403);
+            return response()->json(['message' => 'No tienes los permisos necesarios'], 403);
         }
 
         $user->erased=true;
@@ -108,10 +109,10 @@ class UserController extends Controller
         $res = $user->save();
 
         if ($res) {
-            return response()->json(['message' => 'User delete succesfully']);
+            return response()->json(['message' => 'Usuario eliminado correctamente']);
         }
 
-        return response()->json(['message' => 'Error to delete user'], 500);
+        return response()->json(['message' => 'Error al eliminar usuario'], 500);
     }
 
     private function upload($image)

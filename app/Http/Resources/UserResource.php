@@ -26,10 +26,10 @@ class UserResource extends JsonResource
             'wallet'    =>      [
                 'amount'    => $this->wallet->amount,
             ],
-            'products'  =>      [
-                'count'     => count($this->products),
-                'data'      =>ProductResource::collection($this->products),
-            ]
+            // 'products'  =>      [
+            //     'count'     => count($this->products),
+            //     'data'      =>ProductResource::collection($this->products),
+            // ]
             // 'reviews'   =>
         ];
     }

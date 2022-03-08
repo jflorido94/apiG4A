@@ -24,8 +24,7 @@ class AuthController extends Controller
             'dni' => 'required|min:8|unique:users,dni',
             'avatar' => 'image|max:1024',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required',
-            'confirm_password' => 'required|same:password'
+            'password' => 'required|confirmed', //pasword_confirmation
         ])->validate();
 
         $input = $request->all();

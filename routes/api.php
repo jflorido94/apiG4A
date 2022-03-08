@@ -34,8 +34,8 @@ Route::group([
 ], function () {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::get('me', [AuthController::class, 'user']);
-    Route::post('me', [AuthController::class, 'user']);
-    Route::delete('me', [AuthController::class, 'user']);
+    // Route::post('me', [AuthController::class, 'user']);
+    // Route::delete('me', [AuthController::class, 'user']);
 });
 
 
