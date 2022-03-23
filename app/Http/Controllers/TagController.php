@@ -41,7 +41,7 @@ class TagController extends Controller
     public function store(Request $request)
     {
         Validator::make($request->all(),[
-            'name' => 'required|unique:tags|max::30',
+            'name' => 'required|unique:tags|max:30',
             'colour' => 'required|unique:tags|regex:/^#[a-f0-9]{6}$/i',
         ])->validate();
 
