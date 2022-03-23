@@ -41,7 +41,7 @@ class TagController extends Controller
     public function store(Request $request)
     {
         Validator::make($request->all(),[
-            'name' => 'required|unique:tags|max::15',
+            'name' => 'required|unique:tags|max::30',
             'colour' => 'required|unique:tags|regex:/^#[a-f0-9]{6}$/i',
         ])->validate();
 
@@ -72,7 +72,7 @@ class TagController extends Controller
     public function update(Request $request, Tag $tag)
     {
         Validator::make($request->all(),[
-            'name' => 'max:15',Rule::unique('tags')->ignore($tag->id),
+            'name' => 'max:30',Rule::unique('tags')->ignore($tag->id),
             'colour' => 'regex:/^#[a-f0-9]{6}$/i',Rule::unique('tags')->ignore($tag->id)
         ])->validate();
 
