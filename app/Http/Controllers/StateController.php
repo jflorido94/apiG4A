@@ -21,16 +21,16 @@ class StateController extends Controller
         return response()->json(StateResource::collection(State::all()), 200);
     }
 
-        // /**
-        //  * Display the specified resource.
-        //  *
-        //  * @param  \App\Models\State  $state
-        //  * @return \Illuminate\Http\Response
-        //  */
-        // public function show(State $state)
-        // {
-        //     return response()->json($state,200);
-        // }
+        /**
+         * Display the specified resource.
+         *
+         * @param  \App\Models\State  $state
+         * @return \Illuminate\Http\Response
+         */
+        public function show(State $state)
+        {
+            return response()->json($state,200);
+        }
 
     /**
      * Store a newly created resource in storage.

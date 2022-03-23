@@ -21,16 +21,16 @@ class ConditionController extends Controller
         return response()->json(ConditionResource::collection(Condition::all()), 200);
     }
 
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  * @param  \App\Models\Condition  $condition
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function show(Condition $condition)
-    // {
-    //     return response()->json($condition, 200);
-    // }
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Condition  $condition
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Condition $condition)
+    {
+        return response()->json($condition, 200);
+    }
 
     /**
      * Store a newly created resource in storage.

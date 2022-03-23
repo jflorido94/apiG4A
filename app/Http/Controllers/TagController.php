@@ -21,16 +21,16 @@ class TagController extends Controller
         return response()->json(TagResource::collection(Tag::all()), 200);
     }
 
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  * @param  \App\Models\Tag  $tag
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function show(Tag $tag)
-    // {
-    //     return response()->json($tag, 200);
-    // }
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Tag  $tag
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Tag $tag)
+    {
+        return response()->json($tag, 200);
+    }
 
     /**
      * Store a newly created resource in storage.
