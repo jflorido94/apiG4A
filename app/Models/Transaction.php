@@ -18,7 +18,7 @@ class Transaction extends Model
     // tiene un estado
     public function state()
     {
-        return $this->belong(State::class);
+        return $this->belongsTo(State::class);
     }
 
     // tiene un producto

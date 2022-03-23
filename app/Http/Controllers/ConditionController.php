@@ -7,6 +7,7 @@ use App\Models\Condition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ConditionController extends Controller
 {
@@ -40,8 +41,9 @@ class ConditionController extends Controller
     public function store(Request $request)
     {
         Validator::make($request->all(),[
-            'name' => 'required|max:180',
+            'name' => 'required|unique:conditions|max:30',
             'description' => 'required|max:4000',
+            'colour' => 'required|unique:conditions|regex:/^#[a-f0-9]{6}$/i',
         ])->validate();
 
         if (! Auth::user()->is_admin) {
@@ -52,6 +54,7 @@ class ConditionController extends Controller
 
         $condition->name = $request->input('name');
         $condition->description = $request->input('description');
+        $condition->colour = $request->input('colour');
 
         $res = $condition->save();
 
@@ -71,8 +74,9 @@ class ConditionController extends Controller
     public function update(Request $request, Condition $condition)
     {
         Validator::make($request->all(),[
-            'name' => 'max:180',
+            'name' => 'max:30',Rule::unique('conditions')->ignore($condition->id),
             'description' => 'max:4000',
+            'colour' => 'regex:/^#[a-f0-9]{6}$/i',Rule::unique('conditions')->ignore($condition->id)
         ])->validate();
 
         if (! Auth::user()->is_admin) {
@@ -84,6 +88,9 @@ class ConditionController extends Controller
         }
         if (!empty($request->input('description'))) {
             $condition->description = $request->input('description');
+        }
+        if (!empty($request->input('colour'))) {
+            $condition->colour = $request->input('colour');
         }
 
         $res = $condition->save();

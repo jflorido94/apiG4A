@@ -21,6 +21,12 @@ class Product extends Model
         return $this->belongsTo(Condition::class);
     }
 
+    // tiene muchas etiquetas
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
     // aparece en una transaccion
     public function transaccition()
     {

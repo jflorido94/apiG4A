@@ -7,6 +7,7 @@ use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class StateController extends Controller
 {
@@ -40,7 +41,7 @@ class StateController extends Controller
     public function store(Request $request)
     {
         Validator::make($request->all(),[
-            'name' => 'required|max:180',
+            'name' => 'required|unique:states|max:50',
             'description' => 'required|max:4000',
         ])->validate();
 
@@ -71,7 +72,7 @@ class StateController extends Controller
     public function update(Request $request, State $state)
     {
         Validator::make($request->all(),[
-            'name' => 'max:180',
+            'name' => 'max:50',Rule::unique('states')->ignore($state->id),
             'description' => 'max:4000',
         ])->validate();
 

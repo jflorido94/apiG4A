@@ -20,10 +20,10 @@ class AuthController extends Controller
         Validator::make($request->all(), [
             'name' => 'required',
             'surnames' => 'required',
-            'nick' => 'required|unique:users,nick',
-            'dni' => 'required|min:8|unique:users,dni',
+            'nick' => 'required|unique:users',
+            'dni' => 'required|min:8|unique:users',
             'avatar' => '',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email|unique:users',
             'password' => 'required|confirmed', //pasword_confirmation
         ])->validate();
 
