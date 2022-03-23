@@ -29,7 +29,7 @@ class ConditionController extends Controller
      */
     public function show(Condition $condition)
     {
-        return response()->json($condition, 200);
+        return response()->json(new ConditionResource($condition), 200);
     }
 
     /**

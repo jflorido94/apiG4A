@@ -29,7 +29,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        return response()->json($tag, 200);
+        return response()->json(new TagResource($tag), 200);
     }
 
     /**

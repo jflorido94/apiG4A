@@ -48,6 +48,35 @@ Route::prefix('users')->group(function () {
     Route::delete('/{user}', [UserController::class, 'destroy'])->middleware('auth:api');
 });
 
+//--- Condiciones de productos ---
+Route::prefix('conditions')->group(function () {
+    Route::get('/', [ConditionController::class, 'index']);
+    // --- Admin only
+    Route::post('/', [ConditionController::class, 'store'])->middleware('auth:api');
+    Route::get('/{condition}', [ConditionController::class, 'show'])->middleware('auth:api');
+    Route::post('/{condition}', [ConditionController::class, 'update'])->middleware('auth:api');
+    Route::delete('/{condition}', [ConditionController::class, 'destroy'])->middleware('auth:api');
+});
+
+//--- Etiquetas de productos ---
+Route::prefix('tags')->group(function () {
+    Route::get('/', [TagController::class, 'index']);
+    // --- Admin only
+    Route::post('/', [TagController::class, 'store'])->middleware('auth:api');
+    Route::get('/{tag}', [TagController::class, 'show'])->middleware('auth:api');
+    Route::post('/{tag}', [TagController::class, 'update'])->middleware('auth:api');
+    Route::delete('/{tag}', [TagController::class, 'destroy'])->middleware('auth:api');
+});
+
+//--- Estado de la transaccion ---
+Route::prefix('states')->group(function () {
+    Route::get('/', [StateController::class, 'index']);
+    // --- Admin only
+    Route::post('/', [StateController::class, 'store'])->middleware('auth:api');
+    Route::get('/{state}', [StateController::class, 'show'])->middleware('auth:api');
+    Route::post('/{state}', [StateController::class, 'update'])->middleware('auth:api');
+    Route::delete('/{state}', [StateController::class, 'destroy'])->middleware('auth:api');
+});
 
 //---- Productos ---
 Route::prefix('products')->group(function () {
@@ -74,36 +103,6 @@ Route::prefix('transactions')->group(function () {
 });
 
 
-//--- Condiciones de productos ---
-Route::prefix('conditions')->group(function () {
-    Route::get('/', [ConditionController::class, 'index']);
-    // --- Admin only
-    Route::post('/', [ConditionController::class, 'store'])->middleware('auth:api');
-    Route::get('/{condition}', [ConditionController::class, 'show'])->middleware('auth:api');
-    Route::post('/{condition}', [ConditionController::class, 'update'])->middleware('auth:api');
-    Route::delete('/{condition}', [ConditionController::class, 'destroy'])->middleware('auth:api');
-});
-
-//--- Etiquetas de productos ---
-Route::prefix('tags')->group(function () {
-    Route::get('/', [TagController::class, 'index']);
-    // --- Admin only
-    Route::post('/', [TagController::class, 'store'])->middleware('auth:api');
-    Route::get('/{tag}', [TagController::class, 'show'])->middleware('auth:api');
-    Route::post('/{tag}', [TagController::class, 'update'])->middleware('auth:api');
-    Route::delete('/{tag}', [TagController::class, 'destroy'])->middleware('auth:api');
-});
-
-
-//--- Estado de la transaccion ---
-Route::prefix('states')->group(function () {
-    Route::get('/', [StateController::class, 'index']);
-    // --- Admin only
-    Route::post('/', [StateController::class, 'store'])->middleware('auth:api');
-    Route::get('/{state}', [StateController::class, 'show'])->middleware('auth:api');
-    Route::post('/{state}', [StateController::class, 'update'])->middleware('auth:api');
-    Route::delete('/{state}', [StateController::class, 'destroy'])->middleware('auth:api');
-});
 
 
 //--- Review ---

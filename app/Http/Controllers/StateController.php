@@ -29,7 +29,7 @@ class StateController extends Controller
          */
         public function show(State $state)
         {
-            return response()->json($state,200);
+            return response()->json(new StateResource($state),200);
         }
 
     /**
