@@ -84,7 +84,7 @@ class TagController extends Controller
             $tag->name = $request->input('name');
         }
         if (!empty($request->input('colour'))) {
-            $tag->description = $request->input('colour');
+            $tag->colour = $request->input('colour');
         }
 
         $res = $tag->save();
