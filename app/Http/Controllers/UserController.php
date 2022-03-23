@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -45,10 +46,8 @@ class UserController extends Controller
         Validator::make($request->all(), [
             'name' => '',
             'surnames' => '',
-            'nick' => 'unique:users,nick',
-            'dni' => 'unique:users,dni',
-            'avatar' => 'image|max:1024',
-            'email' => 'email|unique:users,email',
+            'avatar' => '',
+            'email' => 'email',Rule::unique('users')->ignore($user->id),
             'password' => 'required|current_password',
             'new_password' => 'confirmed',
         ])->validate();
@@ -57,18 +56,14 @@ class UserController extends Controller
             return response()->json(['message' => 'No tienes los permisos necesarios'], 403);
         }
 
-        if (!empty($request->file('avatar'))) {
-            $url_image = $this->upload($request->file('avatar'));
-            $user->avatar = $url_image;
+        if (!empty($request->input('avatar'))) {
+            $user->avatar = $request->input('avatar');
         }
         if (!empty($request->input('name'))) {
             $user->name = $request->input('name');
         }
         if (!empty($request->input('surnames'))) {
             $user->surnames = $request->input('surnames');
-        }
-        if (!empty($request->input('nick'))) {
-            $user->nick = $request->input('nick');
         }
         if (!empty($request->input('email'))) {
             $user->email = $request->input('email');
@@ -115,13 +110,4 @@ class UserController extends Controller
         return response()->json(['message' => 'Error al eliminar usuario'], 500);
     }
 
-    private function upload($image)
-    {
-        $path_info = pathinfo($image->getClientOriginalName());
-        $image_path = 'images/user';
-
-        $rename = uniqid() . '.' . $path_info['extension'];
-        $image->move(public_path() . "/$image_path", $rename);
-        return "$image_path/$rename";
-    }
 }
