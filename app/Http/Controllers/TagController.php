@@ -42,7 +42,7 @@ class TagController extends Controller
     {
         Validator::make($request->all(),[
             'name' => 'required|unique:tags|max:30',
-            'colour' => 'required|unique:tags|regex:/^#[a-f0-9]{6}$/i',
+            'colour' => 'required|unique:tags|regex:^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
         ])->validate();
 
         if (! Auth::user()->is_admin) {
@@ -73,7 +73,7 @@ class TagController extends Controller
     {
         Validator::make($request->all(),[
             'name' => 'max:30',Rule::unique('tags')->ignore($tag->id),
-            'colour' => 'regex:/^#[a-f0-9]{6}$/i',Rule::unique('tags')->ignore($tag->id)
+            'colour' => 'regex:^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',Rule::unique('tags')->ignore($tag->id)
         ])->validate();
 
         if (! Auth::user()->is_admin) {
