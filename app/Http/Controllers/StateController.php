@@ -103,7 +103,7 @@ class StateController extends Controller
      */
     public function destroy(State $state)
     {
-        if (Auth::user()->is_admin) {
+        if (!Auth::user()->is_admin) {
             return response()->json(['message' => 'You don\'t have permissions'], 403);
         }
 

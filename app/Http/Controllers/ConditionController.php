@@ -43,7 +43,7 @@ class ConditionController extends Controller
         Validator::make($request->all(),[
             'name' => 'required|unique:conditions|max:30',
             'description' => 'required|max:4000',
-            'colour' => 'required|unique:conditions|regex: ^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
+            'colour' => 'required|unique:conditions|regex:/^#([a-f0-9]{3}){1,2}$/',
         ])->validate();
 
         if (! Auth::user()->is_admin) {
@@ -76,7 +76,7 @@ class ConditionController extends Controller
         Validator::make($request->all(),[
             'name' => 'max:30',Rule::unique('conditions')->ignore($condition->id),
             'description' => 'max:4000',
-            'colour' => 'regex:^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',Rule::unique('conditions')->ignore($condition->id)
+            'colour' => 'regex:/^#([a-f0-9]{3}){1,2}$/i',Rule::unique('conditions')->ignore($condition->id)
         ])->validate();
 
         if (! Auth::user()->is_admin) {
@@ -109,7 +109,7 @@ class ConditionController extends Controller
      */
     public function destroy(Condition $condition)  //borrar en cascada?
     {
-        if (Auth::user()->is_admin) {
+        if (! Auth::user()->is_admin) {
             return response()->json(['message' => 'You don\'t have permissions'], 403);
         }
 
