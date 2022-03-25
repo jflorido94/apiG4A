@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->string('image')->nullable();
+            $table->mediumText('image')->nullable();
             $table->decimal('price', 12, 2, true);
             $table->boolean('erased')->default(false);
             $table->timestamps();
