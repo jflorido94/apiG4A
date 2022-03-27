@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\ProductResource;
 use App\Models\Condition;
 use App\Models\Tag;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,7 +20,18 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return response()->json(ProductResource::collection(Product::latest()->paginate()), 200);
+        return response()->json(ProductResource::collection(Product::latest()->get()), 200);
+    }
+
+    /**
+     * Display a listing of the resource from the user login.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function manage()
+    {
+        $user = Auth::user();
+        return response()->json(ProductResource::collection($user->products), 200);
     }
 
     /**
@@ -46,13 +58,13 @@ class ProductController extends Controller
             'description' => 'required|max:4000',
             'image' => '',
             'price' => 'required|numeric|min:0|max:9999.99',
-            'condition_id' => 'required|exists:conditions,id',
-            'tags' => 'present|array',
-            'tags.*' => 'required|exists:tags,id',
+            'condition' => 'required|exists:conditions,id',
+            // 'tags' => 'present|array|max:3',
+            // 'tags.*' => 'required|exists:tags,id',
         ])->validate();
 
         $user = Auth::user();
-        $condition = Condition::find($request->input('condition_id'));
+        $condition = Condition::find($request->input('condition'));
 
         $product = new Product();
 
@@ -73,7 +85,7 @@ class ProductController extends Controller
 
         $res = $product->save();
 
-        $product->tags()->sync($request->input('tags'));
+        // $product->tags()->sync($request->input('tags'));
         if ($res) {
             return response()->json(['message' => 'Product create succesfully'], 201);
         }
@@ -94,9 +106,9 @@ class ProductController extends Controller
             'description' => 'max:4000',
             'image' => '',
             'price' => 'numeric|min:0|max:9999.99',
-            'condition_id' => 'exists:conditions,id',
-            'tags' => 'present|array',
-            'tags.*' => 'required|exists:tags,id',
+            'condition' => 'exists:conditions,id',
+            // 'tags' => 'present|array',
+            // 'tags.*' => 'required|exists:tags,id',
         ])->validate();
 
         if (Auth::id() !== $product->user->id) {
@@ -104,7 +116,7 @@ class ProductController extends Controller
         }
 
         if (!empty($request->input('condition_id'))) {
-            $condition = Condition::find($request->input('condition_id'));
+            $condition = Condition::find($request->input('condition'));
             $product->condition()->associate($condition);
         }
 
@@ -120,7 +132,7 @@ class ProductController extends Controller
         if (!empty($request->input('price'))) {
             $product->price = $request->input('price');
         }
-        $product->tags()->sync($request->input('tags'));
+        // $product->tags()->sync($request->input('tags'));
 
         $res = $product->save();
 
@@ -154,5 +166,47 @@ class ProductController extends Controller
 
         return response()->json(['message' => 'Error to delete product'], 500);
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function buy(Product $product)
+    {
+        if (Auth::id() == $product->user->id) {
+            return response()->json(['message' => 'You can\'t buy your own product'], 403);
+        }
+
+        $user = Auth::user();
+
+        $trans = Transaction::create([
+            'amount' => $product->price,
+            'product_id' => $product->id,
+            'buyer_id' => $user->id,
+            'seller_id' => $product->user->id,
+        ]);
+
+        $user->wallet->amount = $user->wallet->amount - $product->price;
+        $product->user->wallet->amount = $product->user->wallet->amount + $product->price;
+
+        $product->user()->associate($user);
+
+
+
+        $res = $product->save();
+
+
+
+        if ($res&&$trans) {
+            return response()->json(['message' => 'Product buy succesfully'], 201);
+        }
+
+        return response()->json(['message' => 'Error to buy product'], 500);
+    }
+
+
 
 }
