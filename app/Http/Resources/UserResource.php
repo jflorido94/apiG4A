@@ -22,6 +22,7 @@ class UserResource extends JsonResource
             'dni'       =>      $this->dni,
             'email'     =>      $this->email,
             'erased'    =>      $this->erased,
+            'is_admin' => $this->is_admin,
             'wallet'    =>      [
                 'amount'    => $this->wallet->amount,
             ],
@@ -41,4 +42,3 @@ class UserResource extends JsonResource
             ];
         }
     }
-
