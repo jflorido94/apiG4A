@@ -18,18 +18,18 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'image' => $this->image,
             'price' => $this->price,
             'erased' => $this->erased,
             'owner' => [
                 'id' => $this->user->id,
                 'nick' => $this->user->nick,
-                'avatar' => $this->user->avatar,
                 'votes'   => [
                     'count' => $this->user->votes->count(),
                     'average' => $this->user->votes->avg('stars')
                 ],
+                'avatar' => $this->user->avatar,
             ],
+            'image' => $this->image,
             'condition' => new ConditionResource($this->condition),
             // 'tags' => TagResource::collection($this->tags),
             'created_at' => $this->created_at,

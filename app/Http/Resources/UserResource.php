@@ -20,17 +20,14 @@ class UserResource extends JsonResource
             'name'      =>      $this->name,
             'surnames'  =>      $this->surnames,
             'dni'       =>      $this->dni,
-            'avatar'    =>      $this->avatar,
             'email'     =>      $this->email,
             'erased'    =>      $this->erased,
             'wallet'    =>      [
                 'amount'    => $this->wallet->amount,
             ],
             'products'  => ProductResource::collection($this->products),
-            'votes'   => [
-                'count' => $this->votes->count(),
-                'average' => $this->votes->avg('stars')
-            ],
+            'average' => $this->votes->avg('stars'),
+            'votes'   => ReviewResource::collection($this->votes),
             'sales' => [
                 'count' => $this->sales->count(),
             ],
@@ -39,7 +36,9 @@ class UserResource extends JsonResource
             ],
             'reviews' => [
                 'count' => $this->reviews->count()
-            ]
-        ];
+            ],
+            'avatar'    =>      $this->avatar,
+            ];
+        }
     }
-}
+

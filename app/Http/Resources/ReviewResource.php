@@ -18,22 +18,23 @@ class ReviewResource extends JsonResource
             'id' => $this->id,
             'stars' => $this->stars,
             'comment' => $this->comment,
-            'user' => [
-                'id' => $this->user->id,
-                'nick' => $this->user()->nick,
-                'avatar' => $this->user()->avatar,
-            ],
             'transaction' => [
                 'product' => [
                     'id' => $this->transaction->product->id,
                     'tittle' => $this->transaction->product->title,
                     'condition' => $this->transaction->product->condition->name,
+                    'image' => $this->transaction->product->image,
                 ],
                 'seller' => [
                     'id' => $this->transaction->seller->id,
                     'tittle' => $this->transaction->seller->nick,
                     'condition' => $this->transaction->seller->avatar,
                 ],
+            ],
+            'user' => [
+                'id' => $this->user->id,
+                'nick' => $this->user->nick,
+                'avatar' => $this->user->avatar,
             ],
             'created_at' => $this->created_at,
         ];
