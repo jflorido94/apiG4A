@@ -18,9 +18,9 @@ class CreateTransactionsTable extends Migration
             $table->decimal('amount', 12, 2 , true); //* quizas sea igual que el precio del producto
             $table->timestamps();
 
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('buyer_id')->constrained('users');
+            $table->foreignId('seller_id')->constrained('users');
             $table->foreignId('product_id')->constrained();
-            $table->foreignId('state_id')->constrained();
         });
     }
 

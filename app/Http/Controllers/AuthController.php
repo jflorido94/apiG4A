@@ -41,7 +41,7 @@ class AuthController extends Controller
 
         $user = User::create($input);
         Wallet::create([
-            'amount' => 0,
+            'amount' => 1000,
             'user_id' => $user->id,
         ]);
 

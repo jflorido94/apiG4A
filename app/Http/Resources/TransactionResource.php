@@ -18,19 +18,19 @@ class TransactionResource extends JsonResource
             'id' => $this->id,
             'amount' => $this->amount,
             'buyer' => [
-                'id' => $this->user->id,
-                'nick' => $this->user->nick,
-                'avatar' => $this->user->avatar,
+                'id' => $this->buyer->id,
+                'nick' => $this->buyer->nick,
+                'avatar' => $this->buyer->avatar,
             ],
             'product' => [
                 'id' => $this->product->id,
                 'tittle' => $this->product->title,
                 'condition' => $this->product->condition->name,
             ],
-            'state' => [
-                'id' => $this->state->id,
-                'title' => $this->state->name,
-                'info' => $this->state->description,
+            'seller' => [
+                'id' => $this->seller->id,
+                'title' => $this->seller->nick,
+                'info' => $this->seller->avatar,
             ],
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

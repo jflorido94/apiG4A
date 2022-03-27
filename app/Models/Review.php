@@ -20,4 +20,17 @@ class Review extends Model
     {
         return $this->belongsTo(Transaction::class);
     }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'title',
+        'comment',
+        'stars',
+        'user_id',
+        'transaction_id',
+    ];
 }

@@ -29,10 +29,10 @@ class ReviewResource extends JsonResource
                     'tittle' => $this->transaction->product->title,
                     'condition' => $this->transaction->product->condition->name,
                 ],
-                'state' => [
-                    'id' => $this->transaction->state->id,
-                    'title' => $this->transaction->state->name,
-                    'info' => $this->transaction->state->description,
+                'seller' => [
+                    'id' => $this->transaction->seller->id,
+                    'tittle' => $this->transaction->seller->nick,
+                    'condition' => $this->transaction->seller->avatar,
                 ],
             ],
             'created_at' => $this->created_at,

@@ -25,10 +25,13 @@ class ProductResource extends JsonResource
                 'id' => $this->user->id,
                 'nick' => $this->user->nick,
                 'avatar' => $this->user->avatar,
+                'votes'   => [
+                    'count' => $this->user->votes->count(),
+                    'average' => $this->user->votes->avg('stars')
+                ],
             ],
             'condition' => new ConditionResource($this->condition),
-            'tags' => TagResource::collection($this->tags),
-            // 'reviews' => $this->reviews,
+            // 'tags' => TagResource::collection($this->tags),
             'created_at' => $this->created_at,
         ];
     }

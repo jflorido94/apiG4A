@@ -19,22 +19,34 @@ class User extends Authenticatable
     }
 
     // // tiene varios productos
-    // public function products()
-    // {
-    //     return $this->hasMany(Product::class);
-    // }
-
-    // // hace varias reviews
-    // public function reviews()
-    // {
-    //     return $this->hasMany(Review::class);
-    // }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 
     // // hace varias compras
-    // public function transactions()
-    // {
-    //     return $this->hasMany(Transaction::class);
-    // }
+    public function sales()
+    {
+        return $this->hasMany(Transaction::class,'seller_id');
+    }
+
+    // // hace varias compras
+    public function shoppings()
+    {
+        return $this->hasMany(Transaction::class,'buyer_id');
+    }
+
+    // hace varias reviews
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    // tiene votos como vendedor
+    public function votes()
+    {
+        return $this->hasManyThrough(Review::class, Transaction::class, 'seller_id');
+    }
 
     // // hace varios reports
     // public function reports()

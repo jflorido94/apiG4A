@@ -21,22 +21,22 @@ class Product extends Model
         return $this->belongsTo(Condition::class);
     }
 
-    // tiene muchas etiquetas
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class);
-    }
+    // // tiene muchas etiquetas
+    // public function tags()
+    // {
+    //     return $this->belongsToMany(Tag::class);
+    // }
 
     // aparece en una transaccion
-    public function transaccition()
-    {
-        return $this->belongsTo(Transaction::class);
-    }
+    // public function transaccition()
+    // {
+    //     return $this->hasOne(Transaction::class);
+    // }
 
     // recibe varios reportes
-    public function accusations()
-    {
-        return $this->morphMany(Report::class, 'reportable');
-    }
+    // public function accusations()
+    // {
+    //     return $this->morphMany(Report::class, 'reportable');
+    // }
 
 }

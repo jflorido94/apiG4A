@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return response()->json(UserResource::collection(User::paginate()),200);
+        return response()->json(UserResource::collection(User::latest()->get()),200);
     }
 
     /**
